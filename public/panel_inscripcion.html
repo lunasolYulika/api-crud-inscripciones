@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Inscripciones</title>
+</head>
+<body>
+
+<h1>PANEL DE INSCRIPCION</h1>
+<h2>Seleccione una opción para continuar</h2>
+
+
+<button id="btnAlta">Alta</button>
+<button id="btnBuscar">Buscar inscripcion</button>
+<button id="btnListarTodos">Listar Inscripciones</button>
+<button id="btnListarInscrCurso">Listar Inscripciones por Curso</button>
+<button id="btnEliminar">Eliminar</button>
+<button id="btn-home">INICIO</button>
+<br><br>
+
+<div id="cursos-container" style="display: none;">
+    <label for="cursoId">Selector de curso:</label>
+    <select id="cursoId" name="cursoId"></select>
+    <button id="btn-insc-curso">Buscar inscriptos</button>
+</div>
+
+<hr>
+<div id="inscripciones-container" style="display: none;">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Curso</th>
+          <th>Usuario</th>
+          <th>Fecha Inscripción</th>
+        </tr>
+      </thead>
+      <tbody id="tabla"></tbody>
+    </table>
+</div>
+<div id="inscriptos-container" style="display: none;">
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Inscripto</th>
+        <th>DNI</th>
+        <th>Fecha Inscripción</th>
+      </tr>
+    </thead>
+    <tbody id="tablaInscriptos"></tbody>
+  </table>
+</div>
+
+<script src="js/panelInscripcion.js"></script>
+</body>
+</html>
