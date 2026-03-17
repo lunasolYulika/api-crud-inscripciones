@@ -89,9 +89,10 @@ exports.obtenerInscriptosPorCurso = async (req, res) => {
       .populate('usuario')
       .populate('curso');
     
+    
     // Extraer solo los usuarios
     const usuarios = inscripciones.map(inscr => inscr.usuario);
-    console.log(`Server: se extrajeron:  ${usuarios}`)
+    console.log(`Server: se extrajeron:  ${usuarios}`)|
     res.json(usuarios);
   } catch (error) {
     res.status(500).json({ error: error.message });

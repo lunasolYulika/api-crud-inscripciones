@@ -1,10 +1,8 @@
 # Dependencias
 node_modules/
 
-# Variables de entorno — MUY IMPORTANTE no subir esto nunca
+# Variables de entorno
 .env
-.env.local
-.env.production
 
 # Logs
 logs/
@@ -17,10 +15,3 @@ Thumbs.db
 
 # VS Code
 .vscode/
-
-# Coverage tests
-coverage/
-
-# Build
-dist/
-build/

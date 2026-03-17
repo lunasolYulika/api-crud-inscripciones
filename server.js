@@ -1,32 +1,27 @@
-// server.js
+// SERVIDOR
+require('dotenv').config();
 const path = require('path');
 const express = require("express");
 const connectDB = require("./config/mongoConexion")
-const cursoRoutes = require("./routes/curso.routes");// Importo el archivo de rutas
+const cursoRoutes = require("./routes/curso.routes");
 const usuarioRoutes =  require("./routes/usuario.routes");
 const inscripcionRoutes =  require("./routes/inscripcion.routes");
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // leido de env
 
 connectDB()
-app.use(express.json()); // Para leer JSON
-app.use(express.static('public'));  // Middleware para archivos estáticos
+app.use(express.json()); 
+app.use(express.static('public'));  // Middleware arch estáticos
 
-// Ruta personalizada para la raíz, sirviendo un archivo estatico
+// sirviendo archivo estatico
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 
-// Asigno las rutas con su prefijo /api/cursos
 app.use("/api/usuarios", usuarioRoutes);
-app.use("/api/cursos", cursoRoutes); // envio el router correspondiente
-app.use("/api/inscripciones", inscripcionRoutes); // envio el router correspondiente
-
-
-// ========================================================
-// Servidor
-// ========================================================
+app.use("/api/cursos", cursoRoutes); 
+app.use("/api/inscripciones", inscripcionRoutes); 
 
 app.listen(PORT, () => {
   console.log(`Servidor funcionando en http://localhost:${PORT}`);
