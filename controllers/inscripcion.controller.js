@@ -1,5 +1,6 @@
 const Inscripcion = require("../models/inscripcion.model")
 const Curso = require("../models/curso.model")
+const mongoose = require("mongoose")
 
 exports.crearInscripcion = async (req,res) =>{
     try{
@@ -74,22 +75,20 @@ exports.buscarInscripcion = async (req,res) => {
   }
 };
 
-//inscriptos por curso
-// OBTENER inscritos por curso
+// OBTENER inscrpitos por curso
 exports.obtenerInscriptosPorCurso = async (req, res) => {
   try {
     const cursoId = req.params.cursoId;
     
     if (!mongoose.Types.ObjectId.isValid(cursoId)){
       return res.status(400).json({ error: 'ID inválido' });
-    }
-      
+    }      
     
     // Buscar todas las inscripciones para este curso y popular el usuario
     const inscripciones = await Inscripcion.find({ curso: cursoId })
       .populate('usuario')
       .populate('curso');
-
+    
     // Extraer solo los usuarios
     const usuarios = inscripciones.map(inscr => inscr.usuario);
     console.log(`Server: se extrajeron:  ${usuarios}`)

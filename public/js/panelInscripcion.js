@@ -156,7 +156,7 @@ btnBuscarInscr.addEventListener("click", async()=>{
      try {
         const response = await fetch(`/api/inscripciones/curso/${cursoId}`); 
         if (!response.ok) {
-          throw new Error('Error al cargar los inscriptos');
+          throw new Error('Server: Error al cargar los inscriptos');
         }
         const usuarios = await response.json();
         // Limpiar la tabla
@@ -168,7 +168,7 @@ btnBuscarInscr.addEventListener("click", async()=>{
           tablaInscriptos.appendChild(tr);
           return;
         }
-
+        //<td>${new Date(usuario.fechaInscripcion).toLocaleDateString()}</td>
         // Crear filas para la tabla
         usuarios.forEach(usuario => {
           const tr = document.createElement('tr');
@@ -176,7 +176,7 @@ btnBuscarInscr.addEventListener("click", async()=>{
             <td>${usuario._id}</td>
             <td>${usuario.nombre || 'Sin nombre'}</td>
             <td>${usuario.dni || 'Sin DNI'}</td>
-            <td>${new Date(usuario.fechaInscripcion).toLocaleDateString()}</td>
+            
           `;
           tablaInscriptos.appendChild(tr);
         });
