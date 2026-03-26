@@ -128,10 +128,7 @@ btnListarTodos.addEventListener('click', async () => {
 // BUSCAR UNA INSCR
 btnBuscar.addEventListener('click', async () => {
   const id = prompt('Ingrese ID de la inscripción:');
-
-
   if (!id) return;
-
   try {
     const res = await fetch(`/api/inscripciones/${id}`);
     if (!res.ok) {
@@ -140,7 +137,6 @@ btnBuscar.addEventListener('click', async () => {
     }
     const inscripcion = await res.json();
     alert(`Inscripción al curso "${inscripcion.curso?.curso || 'Sin curso'}" para alumno "${inscripcion.usuario?.nombre || 'Sin usuario'}"`);
-
   } catch (error) {
     alert('Error: ' + error.message);
   }
@@ -186,7 +182,7 @@ btnBuscarInscr.addEventListener("click", async()=>{
   }
 });
 
-
+// ELIMINAR 
 btnEliminar.addEventListener('click', async () => {
   const id = prompt('Ingrese ID de la inscripción a eliminar:');
   if (!id) return;
