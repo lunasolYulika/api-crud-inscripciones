@@ -19,16 +19,15 @@ btnInicio.addEventListener('click',  () => {
 btnAlta.addEventListener('click', async () => {
 
   const curso = prompt('Ingrese nombre de curso:');
-  if (!curso) return;
-  const cupo = prompt('Ingrese el cupo máxmio:');
-  if (!cupo) return;
+  //if (!curso) return;
+  const cupoMax = prompt('Ingrese el cupo máxmio:').trim();
+  //if (!cupo) return;
 
-  const cupoMax = Number(cupo);
-  if (isNaN(cupoMax)) {
+  //const cupoMax = Number(cupo);
+  /*if (isNaN(cupoMax)) {
     alert('El cupo debe ser numérico');
     return;
-  }
-
+  }*/
   const cursoAlta = { curso, cupoMax };
 
   try {
@@ -40,7 +39,9 @@ btnAlta.addEventListener('click', async () => {
 
     if (!res.ok) {
       const err = await res.json();
-      throw new Error(err.error);
+      const mensaje = err.mensaje || err.errores?.map(e=>e.msg).join('\n') || 'Error';
+      throw new Error(mensaje);
+     //throw new Error(err.error);
     }
 
     const cursoCreado = await res.json();

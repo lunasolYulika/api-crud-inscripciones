@@ -18,17 +18,19 @@ btnInicio.addEventListener('click',  () => {
 // ===============================
 btnAltaUsuario.addEventListener('click', async () => {
 
-  const dniInput = prompt('Ingrese DNI:');
-  if (!dniInput) return;
+  //const dniInput = prompt('Ingrese DNI:');
+  const dni = prompt('Ingrese DNI:').trim(); // no necesito castear a entero, eso es revisado por validator
+  //if (!dniInput) return;
 
-  const dni = Number(dniInput);
+  //const dni = Number(dniInput);
+  /*
   if (isNaN(dni)) {
     alert('El DNI debe ser numérico');
     return;
-  }
+  }*/
 
   const nombre = prompt('Ingrese nombre:');
-  if (!nombre) return;
+  //if (!nombre) return;
 
   const usuario = { dni, nombre };
 
@@ -40,9 +42,17 @@ btnAltaUsuario.addEventListener('click', async () => {
     });
 
     if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.error);
+      const err = await res.json();     
+      const mensaje = err.error || err.errores?.map(e => e.msg).join('\n') || 'Error';
+      throw new Error(mensaje);
     }
+  /*  if (!res.ok) {
+      const err = await res.json();
+      //throw new Error(err.error);
+      const mensaje = err.error || err.errores?.map(e => e.msg).join('\n') || 'Error';
+      throw new Error(mensaje);
+
+    }*/
 
     const creado = await res.json();
     alert(`Usuario creado\nID: ${creado._id}`);

@@ -18,14 +18,13 @@ app.use(helmet())
 app.use(cors())
 app.use(morgan("dev"))
 app.use(express.json()); 
-app.use(express.static('public'));  // Middleware arch estáticos
-
-// sirviendo archivo estatico
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-
+app.use(express.static('public', {
+  etag: false,
+  maxAge: 0,
+  setHeaders: (res) => {
+    res.setHeader('Cache-Control', 'no-store');
+  }
+}));
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/cursos", cursoRoutes); 
 app.use("/api/inscripciones", inscripcionRoutes); 

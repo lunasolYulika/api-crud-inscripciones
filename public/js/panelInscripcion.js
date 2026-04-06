@@ -75,12 +75,12 @@ btnInicio.addEventListener('click', () => {
 //--------------------------------------------------------------------------------------------
 // ALTA inscr
 btnAlta.addEventListener('click', async () => {
-  const usuarioId = prompt('Ingrese id alumno:');
-  if (!usuarioId) return;
-  const cursoId = prompt('Ingrese el id del curso:');
-  if (!cursoId) return;
+  const usuario = prompt('Ingrese id alumno:');
+  //if (!usuarioId) return;
+  const curso = prompt('Ingrese el id del curso:');
+  //if (!cursoId) return;
 
-  const inscripcion = { usuarioId, cursoId };
+  const inscripcion = { usuario, curso }; // mismo nombre q el validador, q a su vez toma nombre de modelo
 
   try {
     const res = await fetch('/api/inscripciones', {
@@ -91,7 +91,8 @@ btnAlta.addEventListener('click', async () => {
 
     if (!res.ok) {
       const err = await res.json();
-      throw new Error(err.error);
+      const mensaje = err.mensaje || err.errores?.map(e=>e.msg).join('\n') || "Error";
+      throw new Error(mensaje);
     }
 
     const inscrCreado = await res.json();
