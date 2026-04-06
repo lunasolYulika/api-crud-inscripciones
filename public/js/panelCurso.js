@@ -97,7 +97,7 @@ btnBuscar.addEventListener('click', async () => {
     }
 
     const curso = await res.json();
-    alert(`Curso encontrado:\nNombre ${curso.dni}\Cupo Max: ${curso.cupoMax}`);
+    alert(`Curso encontrado:\nNombre ${curso.curso}\Cupo Max: ${curso.cupoMax}`);
 
   } catch (error) {
     alert(error.message);

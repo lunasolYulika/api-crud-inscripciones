@@ -98,3 +98,28 @@ exports.obtenerInscriptosPorCurso = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.obtenerDisponibilidad = async (req, res) =>{
+  
+  try{
+    const cursos = await Curso.find();
+    const disponibilidad = []
+    cursos.forEach(async c =>{
+      
+      const cantInscriptos = await Inscripcion.countDocuments({curso:c._id})
+      const cantDisp = c.cupoMax - cantInscriptos
+      const disponiblidadCurso = {
+        idCurso : c._id,
+        nombreCurso: c.curso,
+        cupoMax: c.cupoMax,
+        inscriptos: cantInscriptos,
+        disponible: cantDisp
+      }
+        disponibilidad.push(disponiblidadCurso)
+    })
+
+    res.json(disponibilidad)
+  }catch(error){
+    res.status(500).json({error: error.message})
+  }
+};
