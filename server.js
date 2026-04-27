@@ -29,6 +29,11 @@ app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/cursos", cursoRoutes); 
 app.use("/api/inscripciones", inscripcionRoutes); 
 
+app.use((err, req, res, next) => { // catch err gral server
+ console.error(err.stack);
+ res.status(500).json({ error: 'Error interno del servidor' });
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor funcionando en http://localhost:${PORT}`);
 });

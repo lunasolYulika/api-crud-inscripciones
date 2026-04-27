@@ -174,12 +174,14 @@ btnEliminarUsuario.addEventListener('click', async () => {
 
     if (!res.ok) {
       const err = await res.json();
-      throw new Error(err.error);
+      const mensaje = err.error || err.errores?.map(e => e.msg).join('\n') || 'Error';
+      throw new Error(mensaje);
     }
 
     alert('Usuario eliminado correctamente');
 
-  } catch (error) {
-    alert(error.message);
-  }
+} catch (error) {
+
+    alert("Error: " + error.message);
+}
 });

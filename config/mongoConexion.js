@@ -8,7 +8,10 @@ const connectDB = async () => {
       throw new Error('MONGO_URI no definida en las variables de entorno');
 
     // conexión moderna SIN opciones adicionales
-    await mongoose.connect(uri);
+   await mongoose.connect(uri);
+
+
+
     console.log('Conectado a MongoDB exitosamente');
 
     // eventos de conexión
