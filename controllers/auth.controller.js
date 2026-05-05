@@ -27,7 +27,7 @@ exports.login = async (req,res) =>{
     try{
         const {email,password} = req.body
 
-        const usuarioEncontrado = Usuario.findOne({email})
+        const usuarioEncontrado = await Usuario.findOne({email})
 
         if (!usuarioEncontrado){
             res.status(401).json({error: "Credenciales incorrectas"})
