@@ -9,6 +9,7 @@ const connectDB = require("./config/mongoConexion")
 const cursoRoutes = require("./routes/curso.routes");
 const usuarioRoutes =  require("./routes/usuario.routes");
 const inscripcionRoutes =  require("./routes/inscripcion.routes");
+const authRoutes = require('./routes/auth.routes')
 const app = express();
 const PORT = process.env.PORT || 3000; // leido de env
 
@@ -18,6 +19,12 @@ app.use(helmet())
 app.use(cors())
 app.use(morgan("dev"))
 app.use(express.json()); 
+
+app.get('/', (req, res) => {
+  res.redirect('/login.html');
+});
+
+
 app.use(express.static('public', {
   etag: false,
   maxAge: 0,
@@ -25,6 +32,8 @@ app.use(express.static('public', {
     res.setHeader('Cache-Control', 'no-store');
   }
 }));
+
+app.use("/api/auth",authRoutes)
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/cursos", cursoRoutes); 
 app.use("/api/inscripciones", inscripcionRoutes); 

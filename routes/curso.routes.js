@@ -1,15 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const cursoController = require('../controllers/curso.controller');
+const {verificarToken, soloAdmin} = require('../middleware/auth.middleware')
 
-// Rutas CRUD para Curso
+//RUTAS PUBLICAS:
 router.get('/', cursoController.listarCursos);           // Obtener todos
 router.get('/:id', cursoController.obtenerCurso);        // Obtener uno por ID
 
+//RUTAS PROTEGIDAS
 const {reglasCurso} = require('../validators/curso.validator');
-router.post('/',reglasCurso, cursoController.crearCurso);            // Crear nuevo
+router.post('/',verificarToken, reglasCurso, cursoController.crearCurso);            // Crear nuevo
+router.put('/:id', verificarToken,cursoController.actualizarCurso);     // Actualizar por ID
 
-router.put('/:id', cursoController.actualizarCurso);     // Actualizar por ID
-router.delete('/:id', cursoController.eliminarCurso);    // Eliminar por ID
+//RUTA SOLO ADMIN
+router.delete('/:id', verificarToken,soloAdmin,cursoController.eliminarCurso);    // Eliminar por ID
 
 module.exports = router;

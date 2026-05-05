@@ -10,10 +10,36 @@
 <body>
     <div class="login-container">
         <h1>ACCESO AL SISTEMA</h1>
-        <input id="input-user" type="text" placeholder="Usuario">
-        <input id="input-psw" type="password" placeholder="Contraseña">
+        <button id="btn-login">Log in</button>
+        <button id="btn-register">Register</button>
+        <br>
+        <br>
+        <div id="login-container">
+            <input id="input-email" type="text" placeholder="Email">
+            <input id="input-psw" type="password" placeholder="Contraseña">
+            <br>
+            <br>
+            <button id="btn-send-login">Loguearse</button>
+
+        </div>
+        <br>
+        <div id="register-container">
+            <input id="input-dni" type="text" placeholder="DNI">
+            <input id="input-nombre" type="text" placeholder="NOMBRE">
+            <input id="input-new-email" type="email" placeholder="EMAIL">
+            <input id="input-new-psw" type="password" placeholder="PASSWORD">
+            <br>
+            <br>
+            <button id="btn-send-register">Completar registro</button>
+
+        </div>
+
+        <br>
+
+
     </div>
 
 </body>
+<script src="./js/login.js"></script>
 
 </html>
